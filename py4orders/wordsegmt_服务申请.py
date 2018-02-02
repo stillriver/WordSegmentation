@@ -2,7 +2,7 @@
 """
 # @Time    : 2018-01-31
 # @Author  : StillRiver 
-# @FileName: readDataFromExcel.py  
+# @FileName: wordsegmt_服务申请.py  
 # @Software: Spyder
 # Python3.6 
 
@@ -13,20 +13,28 @@ import csv
 import jieba
 import jieba.analyse
 
+#read and write file path config
+orderPath = r'D:\WorkSpace\TextMining\Data\all\服务申请.xlsx'
+csvPath = r'D:\WorkSpace\TextMining\Data\all\服务申请.csv'
+stpwdPath = r'D:\WorkSpace\TextMining\Python\WordSegmentation\stopwords\stop_words2.txt'
+nsswdPath = r'D:\WorkSpace\TextMining\Python\WordSegmentation\stopwords\nonsense_words.txt'
+
+#feature location
+orderNoCol = 4
+acptTextCol = 40
+hadlTextCol = 50
+
 
 #Read input excel file
 #import xlrd
 
 #fpath = 'D:\\WorkSpace\\Python\\Jupyter\\TextMining\\Steming\\投诉.xlsx'
-fpath = r'D:\WorkSpace\TextMining\Data\all\投诉.xlsx'
-wkbook = xlrd.open_workbook(fpath)
+#fpath = r'D:\WorkSpace\TextMining\Data\all\投诉.xlsx'
+#wkbook = xlrd.open_workbook(fpath)
+wkbook = xlrd.open_workbook(orderPath)
 
 sheet = wkbook.sheet_by_index(0)
 print("Sheet.name=%s, nrows=%d, ncols=%d" %(sheet.name,sheet.nrows,sheet.ncols))
-
-orderNoCol = 2
-acptTextCol = 38
-hadlTextCol = 48
 
 
 #Regular expr. compile
@@ -39,7 +47,7 @@ clearText = re.compile(r'\W+')
 
 #import csv
 
-csvFile = open('投诉.csv','w',newline='')
+csvFile = open(csvPath,'w',newline='')
 wr = csv.writer(csvFile)
 wr.writerow(["Index","Labels",
              #"AcceptContent",
@@ -56,7 +64,7 @@ def stopwordslist(filepath):
 
 # 对句子去除停用词
 def removestopwords(sentence):
-    stopwords = stopwordslist('stop_words2.txt')  # 这里加载停用词的路径
+    stopwords = stopwordslist(stpwdPath)  # 这里加载停用词的路径
     words = []
     for word in sentence:
         if word not in stopwords:
@@ -66,7 +74,7 @@ def removestopwords(sentence):
     return words
 
 # config jieba
-jieba.analyse.set_stop_words('nonsense_words.txt')
+jieba.analyse.set_stop_words(nsswdPath)
     
 for iOrder in range(1,sheet.nrows):   # from 1, because of excel file with header 
     #oderNo

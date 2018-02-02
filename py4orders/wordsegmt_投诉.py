@@ -2,7 +2,7 @@
 """
 # @Time    : 2018-01-31
 # @Author  : StillRiver 
-# @FileName: readDataFromExcel.py  
+# @FileName: wordsegmt_投诉.py  
 # @Software: Spyder
 # Python3.6 
 
@@ -39,7 +39,7 @@ clearText = re.compile(r'\W+')
 
 #import csv
 
-csvFile = open('投诉.csv','w',newline='')
+csvFile = open(r'D:\WorkSpace\TextMining\Data\all\投诉.csv','w',newline='')
 wr = csv.writer(csvFile)
 wr.writerow(["Index","Labels",
              #"AcceptContent",
@@ -56,7 +56,7 @@ def stopwordslist(filepath):
 
 # 对句子去除停用词
 def removestopwords(sentence):
-    stopwords = stopwordslist('stop_words2.txt')  # 这里加载停用词的路径
+    stopwords = stopwordslist(r'D:\WorkSpace\TextMining\Python\WordSegmentation\stopwords\stop_words2.txt')  # 这里加载停用词的路径
     words = []
     for word in sentence:
         if word not in stopwords:
@@ -66,7 +66,7 @@ def removestopwords(sentence):
     return words
 
 # config jieba
-jieba.analyse.set_stop_words('nonsense_words.txt')
+jieba.analyse.set_stop_words(r'D:\WorkSpace\TextMining\Python\WordSegmentation\stopwords\nonsense_words.txt')
     
 for iOrder in range(1,sheet.nrows):   # from 1, because of excel file with header 
     #oderNo
