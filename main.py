@@ -24,7 +24,9 @@ if __name__ == '__main__':
         sys.exit(1)
     
 #    read files
-    contentList = fop.rExcel([4,40,50])
+    colIndices = [4,40,50]   #depent on which order you wanna to access
+    contentList = fop.rdExcel(colIndices)
+    
     
     
     
