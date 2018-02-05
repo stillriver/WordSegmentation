@@ -15,7 +15,7 @@ from fileIO import Fop as proc
 
 if __name__ == '__main__':
 #    create a class <Fop> instance
-    fpath = r'D:\WorkSpace\TextMining\Data\all\建议.xlsx'
+    fpath = r'D:\WorkSpace\TextMining\Data\all\意见.xlsx'
     
     try:
         fop = proc.Fop(fpath)
@@ -25,7 +25,9 @@ if __name__ == '__main__':
     
 #    read files
     colIndices = [4,40,50]   #depent on which order you wanna to access
-    contentList = fop.rdExcel(colIndices)
+    contentList = fop.rdExcelbyIndex(colIndices)
+    wordsegmtDF = fop.doWordSegmt()
+    fop.wtExcel(r'D:\WorkSpace\TextMining\意见.xlsx')
     
     
     
