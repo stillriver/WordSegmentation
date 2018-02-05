@@ -82,6 +82,26 @@ class Fop(object):
         self.outDF = inDF.iloc[:,inList]
         return self.outDF
               
+
+    def rdExcelbyColName(self,inList):
+        '''
+        method1: rdExcel(inList)
+        to read an excel file via pandas,giving their col indices or col names
+        '''
+        
+        print('Here in rExcel')
+        
+        # read file
+        try:
+            inDF = pd.read_excel(self.fpath,sheetname = 0)
+        except IOError:
+            print('Failed to read this excel file')
+            sys.exit(1)
+            
+        # extract and return slices you want
+        self.outDF = inDF.loc[:,inList]
+        return self.outDF
+
         
         
 #    method2:

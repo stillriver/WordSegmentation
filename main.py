@@ -8,6 +8,8 @@
 
 """
 import sys
+import time
+
 from exception import MyException as expt
 from fileIO import Fop as proc
 
@@ -15,7 +17,9 @@ from fileIO import Fop as proc
 
 if __name__ == '__main__':
 #    create a class <Fop> instance
-    fpath = r'D:\WorkSpace\TextMining\Data\all\意见.xlsx'
+    fpath = r'D:\WorkSpace\TextMining\Data\all\投诉.xlsx'
+    
+    start_time = time.time()
     
     try:
         fop = proc.Fop(fpath)
@@ -25,9 +29,15 @@ if __name__ == '__main__':
     
 #    read files
     colIndices = [4,40,50]   #depent on which order you wanna to access
-    contentList = fop.rdExcelbyIndex(colIndices)
+#    contentList = fop.rdExcelbyIndex(colIndices)
+    colNames = ['ORDERNO','ACCEPTCONTENT','HANDLESITUATION']
+    fop.rdExcelbyColName(colNames)
     wordsegmtDF = fop.doWordSegmt()
-    fop.wtExcel(r'D:\WorkSpace\TextMining\意见.xlsx')
+    fop.wtExcel(r'D:\WorkSpace\TextMining\投诉.xlsx')
+    
+    end_time = time.time()
+    
+    print('Running time: %d' %(end_time - start_time))
     
     
     
